@@ -3,10 +3,13 @@ function getId(id) {
     return document.getElementById(id);
 }
 
-
-// add button functionality
-getId('add-btn').addEventListener('click', function () {
+// add task function
+function addTask() {
     const inputValue = getId('to-do-value').value
+    if (inputValue === '') {
+        return 'invalid'
+    }
+
     const listContainer = getId('list-container')
     const newDiv = document.createElement('div')
     newDiv.innerHTML = `
@@ -18,16 +21,30 @@ getId('add-btn').addEventListener('click', function () {
     `
     listContainer.append(newDiv)
 
+
     getId('to-do-value').value = "";
+}
+
+
+
+// add button functionality
+getId('add-btn').addEventListener('click',addTask)
+
+
+// enter key functionality
+getId('to-do-value').addEventListener('keypress',function(e){
+    if(e.key==='Enter'){
+        addTask();
+    }
 })
 
 
 
 
 // check button functionality
-getId('list-container').addEventListener('click',function(e){
+getId('list-container').addEventListener('click', function (e) {
 
-    if(e.target.className.includes('check-btn')){
+    if (e.target.className.includes('check-btn')) {
         e.target.style.color = '#4ed164'
 
 
@@ -42,10 +59,10 @@ getId('list-container').addEventListener('click',function(e){
 })
 
 // trash button functionality
-getId('list-container').addEventListener('click',function(e){
-    if(e.target.className.includes('trash-btn')){
-        
-        const taskDiv =e.target.parentNode.parentNode
+getId('list-container').addEventListener('click', function (e) {
+    if (e.target.className.includes('trash-btn')) {
+
+        const taskDiv = e.target.parentNode.parentNode
         taskDiv.remove();
     }
 })
