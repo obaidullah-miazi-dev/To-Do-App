@@ -41,7 +41,14 @@ getId('list-container').addEventListener('click',function(e){
 
 })
 
-
+// trash button functionality
+getId('list-container').addEventListener('click',function(e){
+    if(e.target.className.includes('trash-btn')){
+        
+        const taskDiv =e.target.parentNode.parentNode
+        taskDiv.remove();
+    }
+})
 
 
 
